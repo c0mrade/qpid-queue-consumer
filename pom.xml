@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.navteq.lcms.message.reader</groupId>
+	<groupId>qpid.queue.message.listener</groupId>
 	<artifactId>Messaging</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -85,23 +85,6 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 		</dependency>
-		<dependency>
-			<groupId>com.navteq.lcms</groupId>
-			<artifactId>lcms-s6-common</artifactId>
-			<version>01.07-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.navteq.lcms</groupId>
-			<artifactId>lcms-common-view</artifactId>
-			<version>01.07-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.navteq.lcms</groupId>
-			<artifactId>lcms-common-messaging</artifactId>
-			<version>01.07-SNAPSHOT</version>
-		</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -112,19 +95,6 @@
 
 	</dependencies>
 	<repositories>
-		<repository>
-			<id>navteqInternal</id>
-			<name>NAVTEQ Internal Repository</name>
-			<url>http://hq-rd-release.hq.navteq.com:8081/artifactory/libs-releases-local</url>
-		</repository>
-		<repository>
-			<id>navteqInternal2</id>
-			<name>NAVTEQ Internal Repository</name>
-			<url>http://hq-rd-release.hq.navteq.com:8081/artifactory/libs-snapshots-local</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
@@ -181,7 +151,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.navteq.lcms.message.listener.Runner</mainClass>
+							<mainClass>qpid.queue.message.listener.Runner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
