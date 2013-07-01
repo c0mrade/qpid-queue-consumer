@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="file:${user.dir}/listener.properties" />
+	</bean>
+	
+	<!-- PLACE/MESSAGE CONVERTER -->
+	<bean id="objClass" class="java.lang.Class" factory-method="forName">
+		<constructor-arg value="qpid.queue.message.listener.SampleObject" />
+	</bean>
+
+	<bean id="messageConverterWithValidation" class="com.navteq.lcms.common.messaging.converter.JAXBMessageConverterWithValidation">
+		<constructor-arg ref="objClass" />
+	</bean>
+
+	<bean id="messageConverter" class="com.navteq.lcms.common.messaging.converter.JAXBMessageConverter">
+		<constructor-arg ref="objClass" />
+	</bean>
+
+	<bean class="com.navteq.lcms.message.listener.Executor" init-method="init">
+		<property name="messageConverterWithValidation" ref="messageConverterWithValidation" />
+		<property name="messageConverter" ref="messageConverter" />
+		<property name="saveResults" value="${save.results}"></property>
+		<property name="connectionURL" value="${connection.url}"></property>
+		<property name="bindingURL" value="${binding.url}"></property>
+	</bean>
+
+</beans>
